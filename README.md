@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 🏁 F1 Hub
+F1 Hub é uma aplicação web que permite realizar buscas e visualizar informações detalhadas sobre temporadas da Fórmula 1, como corridas e equipes participantes. O sistema foi desenvolvido como parte da disciplina de Programação Web Fullstack com foco no consumo de APIs públicas e uso de React.js.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 📌 Objetivo
+Desenvolver uma Single Page Application (SPA) em React.js, consumindo a [Ergast Developer API](https://ergast.com/mrd/) para exibir dados atualizados da Fórmula 1, utilizando recursos modernos da biblioteca React.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Deploy
+A aplicação está disponível em:  
+[🔗 GitHub Pages - F1 Hub](#) *(substitua pelo link real do GitHub Pages)*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ⚙️ Tecnologias Utilizadas
+- ⚛️ React.js (Create React App)
+- 📦 Hook avançado: `useReducer`
+- 🎨 UI: [Material UI](https://mui.com/)
+- 🌐 API Pública: [Ergast Developer API](https://ergast.com/mrd/)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🧠 Funcionalidades
+- 🔍 Busca por temporadas da Fórmula 1
+- 📅 Visualização das corridas e seus detalhes
+- 🏎️ Listagem das equipes participantes por temporada
+- 🔄 SPA com atualização dinâmica (sem reload)
+- ⚠️ Mensagens de erro e validações de entrada de busca
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Instalação e Execução
+Clone o repositório e siga os passos abaixo:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Acesse `http://localhost:3000` no navegador para visualizar a aplicação rodando localmente.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📁 Estrutura do Projeto
+```
+src/
+├── components/      # Componentes em JSX
+├── contexts/        # Contextos React usados na aplicação
+├── App.js           # Componente principal
+└── index.js         # Ponto de entrada
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 👨‍💻 Integrantes
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Luiz Marçon  
+- Igor Martins
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📄 Licença
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este projeto é apenas para fins educacionais no contexto da disciplina de Programação Web Fullstack da UTFPR.
