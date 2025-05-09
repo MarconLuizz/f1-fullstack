@@ -1,51 +1,47 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { F1Context } from "../contexts/F1Context";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 
 const SeasonSelector = () => {
-  const { state, dispatch } = useContext(F1Context);
+  const { dispatch } = useContext(F1Context);
+  const [inputYear, setInputYear] = useState("");
 
-  const handleSelectSeason = (e) => {
-    const season = e.target.value;
-    if (season) {
-      dispatch({ type: "SET_SEASON", payload: season });
+  const fetchRaces = async () => {
+    if (!inputYear) {
+      dispatch({ type: "SET_ERROR", payload: "Informe o ano da temporada." });
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://ergast.com/api/f1/${inputYear}.json`
+      );
+      const data = await response.json();
+      dispatch({ type: "SET_SEASON", payload: inputYear });
+      dispatch({ type: "SET_RACES", payload: data.MRData.RaceTable.Races });
+    } catch (err) {
+      dispatch({
+        type: "SET_ERROR",
+        payload: "Erro ao buscar os dados da temporada.",
+      });
     }
   };
 
   return (
-    <div>
+    <Box display="flex" gap={2} mb={3}>
       <TextField
-        label="Ano da Temporada"
+        label="Ano da Temporada (1950 - 2024)"
         variant="outlined"
         type="number"
-        onChange={handleSelectSeason}
         fullWidth
+        value={inputYear}
+        onChange={(e) => setInputYear(e.target.value)}
       />
-      <Button
-        variant="contained"
-        onClick={() => fetchRaces(state.season, dispatch)}
-        disabled={!state.season}
-      >
-        Buscar Corridas
+      <Button variant="contained" onClick={fetchRaces}>
+        Buscar
       </Button>
-    </div>
+    </Box>
   );
-};
-
-const fetchRaces = (season, dispatch) => {
-  const url = `https://ergast.com/api/f1/${season}.json`;
-
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      dispatch({ type: "SET_RACES", payload: data.MRData.RaceTable.Races });
-    })
-    .catch((error) => {
-      dispatch({
-        type: "SET_ERROR",
-        payload: "Erro ao carregar dados da temporada.",
-      });
-    });
 };
 
 export default SeasonSelector;

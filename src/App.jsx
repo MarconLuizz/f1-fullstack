@@ -1,9 +1,10 @@
+// src/App.jsx
 import React from "react";
 import { F1Provider } from "./contexts/F1Context";
 import { Container, Typography } from "@mui/material";
 import SeasonSelector from "./components/SeasonSelector";
 import RaceList from "./components/RaceList";
-import RaceDetails from "./components/RaceDetails";
+import TeamDrivers from "./components/TeamDrivers";
 import ErrorMessage from "./components/ErrorMessage";
 
 function App() {
@@ -11,12 +12,12 @@ function App() {
     <F1Provider>
       <Container maxWidth="md" sx={{ mt: 4 }}>
         <Typography variant="h4" gutterBottom>
-          Visualizador de Temporadas da Fórmula 1
+          F1 HUB - Informações sobre temporadas da F1
         </Typography>
         <ErrorMessage />
         <SeasonSelector />
         <RaceList />
-        <RaceDetails />
+        <TeamDrivers />
       </Container>
     </F1Provider>
   );

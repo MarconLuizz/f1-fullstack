@@ -7,6 +7,13 @@ import {
   Typography,
   Box,
   IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -16,8 +23,6 @@ const RaceDetails = ({ open, onClose }) => {
   const results = state.raceResult;
 
   if (!race) return null;
-
-  const winner = results && results.length > 0 ? results[0] : null;
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
@@ -41,19 +46,33 @@ const RaceDetails = ({ open, onClose }) => {
           {race.Circuit.Location.country}
         </Typography>
 
-        {winner && (
+        {results && results.length > 0 && (
           <Box mt={3}>
-            <Typography variant="h6">🏁 Vencedor</Typography>
-            <Typography variant="body1">
-              {winner.Driver.givenName} {winner.Driver.familyName} (
-              {winner.Driver.nationality})
-            </Typography>
-            <Typography variant="body2">
-              Equipe: {winner.Constructor.name}
-            </Typography>
-            <Typography variant="body2">
-              Tempo: {winner.Time?.time || "N/A"}
-            </Typography>
+            <Typography variant="h6">🏁 Classificação Completa</Typography>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>#</TableCell>
+                    <TableCell>Nome do Piloto</TableCell>
+                    <TableCell>Equipe</TableCell>
+                    <TableCell>Tempo</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {results.map((result, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{result.position}</TableCell>
+                      <TableCell>
+                        {result.Driver.givenName} {result.Driver.familyName}
+                      </TableCell>
+                      <TableCell>{result.Constructor.name}</TableCell>
+                      <TableCell>{result.Time?.time || "N/A"}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Box>
         )}
       </DialogContent>

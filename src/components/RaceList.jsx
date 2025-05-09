@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { F1Context } from "../contexts/F1Context";
 import {
   List,
-  ListItemButton,
+  ListItem,
   ListItemText,
+  ListItemSecondaryAction,
   Typography,
   Box,
+  Button,
 } from "@mui/material";
 import RaceDetails from "./RaceDetails";
 
@@ -44,12 +46,17 @@ const RaceList = () => {
       </Typography>
       <List>
         {state.races.map((race, index) => (
-          <ListItemButton key={index} onClick={() => handleClickRace(race)}>
+          <ListItem key={index} divider>
             <ListItemText
               primary={race.raceName}
               secondary={`${race.Circuit.circuitName} - ${race.date}`}
             />
-          </ListItemButton>
+            <ListItemSecondaryAction>
+              <Button variant="outlined" onClick={() => handleClickRace(race)}>
+                Ver Detalhes
+              </Button>
+            </ListItemSecondaryAction>
+          </ListItem>
         ))}
       </List>
 
