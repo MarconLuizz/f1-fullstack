@@ -12,6 +12,8 @@ import {
   ListItem,
   ListItemText,
   CircularProgress,
+  Stack,
+  Button,
 } from "@mui/material";
 
 const TeamDrivers = () => {
@@ -20,57 +22,64 @@ const TeamDrivers = () => {
   const [selectedConstructor, setSelectedConstructor] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 1) Sempre que a temporada mudar, buscar as equipes
   useEffect(() => {
     if (!season) return;
-    const fetchConstructors = async () => {
+    const loadConstructors = async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `https://ergast.com/api/f1/${season}/constructors.json`
-        );
-        const data = await res.json();
-        const list = data.MRData.ConstructorTable.Constructors;
-        dispatch({ type: "SET_CONSTRUCTORS", payload: list });
+        const r = await fetch(`https://ergast.com/api/f1/${season}/constructors.json`);
+        const data = await r.json();
+        dispatch({
+          type: "SET_CONSTRUCTORS",
+          payload: data.MRData.ConstructorTable.Constructors,
+        });
       } catch {
         dispatch({ type: "SET_ERROR", payload: "Erro ao buscar equipes." });
       } finally {
         setLoading(false);
       }
     };
-    fetchConstructors();
+    loadConstructors();
   }, [season, dispatch]);
 
-  // 2) Quando o usuário escolher uma equipe, buscar os pilotos
   useEffect(() => {
     if (!selectedConstructor) return;
-    const fetchDrivers = async () => {
+    const loadDrivers = async () => {
       setLoading(true);
       try {
-        const res = await fetch(
+        const r = await fetch(
           `https://ergast.com/api/f1/${season}/constructors/${selectedConstructor}/drivers.json`
         );
-        const data = await res.json();
-        const list = data.MRData.DriverTable.Drivers;
-        dispatch({ type: "SET_DRIVERS", payload: list });
+        const data = await r.json();
+        dispatch({
+          type: "SET_DRIVERS",
+          payload: data.MRData.DriverTable.Drivers,
+        });
       } catch {
         dispatch({ type: "SET_ERROR", payload: "Erro ao buscar pilotos." });
       } finally {
         setLoading(false);
       }
     };
-    fetchDrivers();
+    loadDrivers();
   }, [selectedConstructor, season, dispatch]);
 
-  if (!season) {
-    return <Typography>Selecione primeiro uma temporada.</Typography>;
-  }
+  const handleClearTeam = () => {
+    // limpa apenas a seleção de equipe e a lista de pilotos
+    setSelectedConstructor("");
+    dispatch({ type: "SET_DRIVERS", payload: [] });
+  };
+
+  if (!season) return <Typography>Selecione primeiro uma temporada.</Typography>;
 
   return (
-    <Box sx={{ mt: 4, mb: 4 }}>
-      <Typography variant="h6" gutterBottom>
-        Pilotos por Equipe — Temporada {season}
-      </Typography>
+    <Box sx={{ mt: 4 }}>
+      <Stack direction="row" spacing={2} alignItems="center" mb={2}>
+        <Typography variant="h6">Pilotos por Equipe — Temporada {season}</Typography>
+        <Button variant="outlined" color="secondary" onClick={handleClearTeam}>
+          Limpar Equipe
+        </Button>
+      </Stack>
 
       {loading && <CircularProgress />}
 

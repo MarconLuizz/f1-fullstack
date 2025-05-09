@@ -31,6 +31,8 @@ function f1Reducer(state, action) {
       return { ...state, raceDetailsOpen: true };
     case "CLOSE_RACE_DETAILS":
       return { ...state, raceDetailsOpen: false };
+    case "CLEAR_SELECTIONS":
+      return { ...initialState };  
     default:
       return state;
   }

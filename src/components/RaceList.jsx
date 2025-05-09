@@ -3,19 +3,21 @@ import { F1Context } from "../contexts/F1Context";
 import {
   List,
   ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
   Typography,
   Box,
   Button,
+  Divider,
+  CircularProgress,
 } from "@mui/material";
 import RaceDetails from "./RaceDetails";
 
 const RaceList = () => {
   const { state, dispatch } = useContext(F1Context);
   const [openDialog, setOpenDialog] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchRaceResult = async (season, round) => {
+    setLoading(true);
     try {
       const response = await fetch(
         `https://ergast.com/api/f1/${season}/${round}/results.json`
@@ -28,6 +30,8 @@ const RaceList = () => {
         type: "SET_ERROR",
         payload: "Erro ao buscar o resultado da corrida.",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,21 +48,43 @@ const RaceList = () => {
       <Typography variant="h6" gutterBottom>
         Corridas da Temporada {state.season}
       </Typography>
-      <List>
-        {state.races.map((race, index) => (
-          <ListItem key={index} divider>
-            <ListItemText
-              primary={race.raceName}
-              secondary={`${race.Circuit.circuitName} - ${race.date}`}
-            />
-            <ListItemSecondaryAction>
-              <Button variant="outlined" onClick={() => handleClickRace(race)}>
-                Ver Detalhes
-              </Button>
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
-      </List>
+
+      {loading ? (
+        <Box display="flex" justifyContent="center" my={2}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <List sx={{ bgcolor: '#f9f9f9', borderRadius: 2, p: 1 }}>
+          {state.races.map((race, index) => (
+            <React.Fragment key={race.round}>
+              <ListItem
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <Box>
+                  <Typography variant="subtitle1">
+                    {race.raceName}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {race.Circuit.circuitName} - {race.date}
+                  </Typography>
+                </Box>
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => handleClickRace(race)}
+                >
+                  Ver Detalhes
+                </Button>
+              </ListItem>
+              {index < state.races.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
+        </List>
+      )}
 
       <RaceDetails open={openDialog} onClose={() => setOpenDialog(false)} />
     </Box>
