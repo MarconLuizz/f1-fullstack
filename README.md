@@ -8,6 +8,11 @@ Desenvolver uma Single Page Application (SPA) em React.js, consumindo a [Ergast 
 
 ---
 
+## 🤝 Colaboradores
+<table> <tr> <td align="center"> <img src="https://github.com/MarconLuizz.png" width="100px;" alt="Luiz Marçon"/><br /> <sub><b>Luiz Antonio da Silva Marçon</b></sub><br /> <a href="https://github.com/MarconLuizz" target="_blank">@MarconLuizz</a> </td> <td align="center"> <img src="https://github.com/IgorMartins04.png" width="100px;" alt="Igor Martins"/><br /> <sub><b>Igor Martins dos Santos</b></sub><br /> <a href="https://github.com/SEU-USUARIO-IGOR" target="_blank">@Igor</a> </td> </tr> </table>
+
+---
+
 ## 🚀 Deploy
 A aplicação está disponível em:  
 [🔗 GitHub Pages - F1 Hub](#) *(substitua pelo link real do GitHub Pages)*
@@ -51,13 +56,6 @@ src/
 ├── App.js           # Componente principal
 └── index.js         # Ponto de entrada
 ```
-
----
-
-## 👨‍💻 Integrantes
-
-- Luiz Marçon  
-- Igor Martins
 
 ---
 
